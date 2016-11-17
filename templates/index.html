@@ -1,69 +1,68 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Hello, Skyliner!</title>
-<style>
-body {
-  font: bold 14px "Helvetica Neue", Arial, Helvetica, sans-serif;
-  background-image: url("/static/background.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-#logo {
-  position: absolute;
-  top: 50px;
-  left: 50px;
-}
-
-#headline {
-  margin-top: 250px;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-}
-
-p {
-  color: white;
-  margin-top: 30px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 500px;
-  line-height: 200%;
-  text-align: left;
-}
-
-#prompt {
-  text-align: center;
-}
-
-div {
-  margin-top: 70px;
-  text-align: center;
-}
-
-a.button {
-  padding: 20px 150px;
-  color: gray;
-  text-decoration: none;
-  border-color: white;
-  border-width: 1px;
-  border-style: solid;
-  background-color: white;
-}
-</style>
-</head>
-<body>
-<a href="https://www.skyliner.io/"><img src='/static/logo.svg' id='logo'/></a>
-<img src='/static/headline.svg' id='headline'/>
-<p>
-  You&rsquo;ve successfully deployed your first application with Skyliner!
-  You can modify the code in this repository to build your app.
-</p>
-
-<div>
-  <a class="button" href="https://www.skyliner.io/dashboard">Take me back to Skyliner</a>
-</div>
-
+<html><head lang="en"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./bootstrap.min.css">
+    <link rel="stylesheet" href="./app.min.css">
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <title>Amazonia API Client</title>
+    <style type="text/css">.aurelia-hide { display:none !important; }</style></head>
+<body aurelia-app="src/main"><!--<view>-->
+    <div class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand">Amazonia Web Interface</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                <!--<view>--><li class="au-target active">
+                    <a href.bind="row.href" class="au-target" href="./index.html">
+                        Home
+                        <!--anchor-->
+                    </a>
+                </li><!--</view>--><!--anchor-->
+                <li class="au-target inactive">
+                    <a href.bind="row.href" class="au-target" href="https://github.com/GeoscienceAustralia/amazonia">
+                        Github
+                        <!--anchor-->
+                    </a>
+                </li><!--</view>--><!--anchor-->
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+    <div id="main" class="container">
+        <form name="form">
+            <h2>Application Yaml:</h2><br />
+            <textarea class="form-control input-lg au-target" name="Input" rows="15" cols="50" placeholder="Experiment with application yaml here" onchange="sendData()"></textarea>
+            <h2>Output Cloud Formation:</h2><br />
+            <textarea readonly class="form-control input-lg au-target" name="Output" rows="15"></textarea>
+        </form>
+    </div>
+    <script type="text/javascript">
+    function sendData() {
+        var local = 'http://' + window.location.host + '/yaml';
+        var url = encodeURI(local);
+        $.ajax({
+            dataType: "json",
+            contentType: "plain/text; charset=utf-8",
+            url: url,
+            method:"POST",
+            data: document.form.Input.value,
+            success: function(data){
+                document.form.Output.value = JSON.stringify(data, null, 2);
+            },
+            error: function(data){
+                document.form.Output.value = JSON.stringify(data, null, 2);
+            }
+        })
+    };
+    </script>
 </body>
 </html>
