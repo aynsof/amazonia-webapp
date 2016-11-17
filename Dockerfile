@@ -1,5 +1,6 @@
 FROM python:3.5-alpine
 ADD . .
+RUN apt-get install -y git
 RUN git clone https://github.com/GeoscienceAustralia/amazonia.git
 RUN cd amazonia
 RUN pip install -e . --user
