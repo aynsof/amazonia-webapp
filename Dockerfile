@@ -1,4 +1,5 @@
-FROM python:3.5-alpine
+#FROM python:3.5-alpine
+FROM geoscienceaustralia/autobots-pipeline
 ADD . .
 RUN yum install -y git
 RUN git clone https://github.com/GeoscienceAustralia/amazonia.git
